@@ -28,7 +28,7 @@ module.exports = (robot) ->
             data = JSON.parse body
 
             weather = data.weather[0].main
-            temp = data.main.temp
+            temp = Math.round(data.main.temp)
 #icon = getWeatherIcon data.weather[0].icon
 #msg.send "weather" + "\n" + weather + "\n" + icon + "\n" + temp + "&deg;C" 
             msg.send weather + "\n" + temp + "&deg;" + "C"
