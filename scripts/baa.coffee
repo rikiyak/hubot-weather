@@ -20,19 +20,27 @@ module.exports = (robot) ->
         city = msg.match[1]
         url = weatherRequest city
         robot.logger.debug url
-        response = request url, (err, response, html) ->
+        request url, (err, response, body) ->
             if err
                 msg.send "request error::" + err
                 return
 
-            data = JSON.parse html
-            msg.send "weather:" + data.weather[0].main
+            data = JSON.parse body
+
+            weather = data.weather[0].main
+            temp = data.main.temp
+            icon = getWeatherIcon data.weather[0].icon
+
+            msg.send "weather" + "\n" + weather + "\n" + icon + "\n" + temp + "&deg;C" 
 
 weatherRequest = (city) ->
     url = "http://api.openweathermap.org/data/2.5/weather?" +
           "q=" + city +
-          "&appid=" + process.env.HUBOT_OPEN_WEATHER_MAP_APP_TOKEN
+          "&appid=" + process.env.HUBOT_OPEN_WEATHER_MAP_APP_TOKEN +
+          "&units=metric"
 
+getWeatherIcon = (icon) ->
+    url = "http://openweathermap.org/img/w/" + icon + ".png"
 
   # robot.hear /badger/i, (res) ->
   #   res.send "Badgers? BADGERS? WE DON'T NEED NO STINKIN BADGERS"
