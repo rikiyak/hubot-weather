@@ -22,10 +22,12 @@ module.exports = (robot) ->
         robot.logger.debug url
         request url, (err, response, body) ->
             if err
-                msg.send "request error::" + err
-                return
+                return msg.send "request error::" + err
 
             data = JSON.parse body
+
+            if data.cod != 200
+                return msg.send "sorry... " + data.message
 
             weather = data.weather[0].main
             temp = Math.round(data.main.temp)
