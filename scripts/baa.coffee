@@ -29,9 +29,9 @@ module.exports = (robot) ->
 
             weather = data.weather[0].main
             temp = data.main.temp
-            icon = getWeatherIcon data.weather[0].icon
-
-            msg.send "weather" + "\n" + weather + "\n" + icon + "\n" + temp + "&deg;C" 
+#icon = getWeatherIcon data.weather[0].icon
+#msg.send "weather" + "\n" + weather + "\n" + icon + "\n" + temp + "&deg;C" 
+            msg.send weather + "\n" + temp + "&deg;" + "C"
 
 weatherRequest = (city) ->
     url = "http://api.openweathermap.org/data/2.5/weather?" +
