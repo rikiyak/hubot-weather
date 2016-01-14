@@ -31,7 +31,7 @@ module.exports = (robot) ->
             temp = Math.round(data.main.temp)
 #icon = getWeatherIcon data.weather[0].icon
 #msg.send "weather" + "\n" + weather + "\n" + icon + "\n" + temp + "&deg;C" 
-            msg.send weather + " / " + temp + " &deg; C"
+            msg.send weather + " / " + temp + "℃"
 
 weatherRequest = (city) ->
     url = "http://api.openweathermap.org/data/2.5/weather?" +
